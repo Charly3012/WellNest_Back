@@ -1,4 +1,4 @@
-package com.wellnest.wellnest.Controller.Demo;
+package com.wellnest.wellnest.Controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;

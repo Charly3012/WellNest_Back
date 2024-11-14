@@ -12,11 +12,14 @@ public class WebSecurityConfig {
 
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http
+            .csrf( csrf -> csrf.disable());
 
         http
                 .authorizeRequests((authorize) ->
                         authorize
                                 .requestMatchers("/auth/**").permitAll() // Permite el acceso sin autenticación
+                                //.requestMatchers("/api/v1/user/**").permitAll()
                                 .anyRequest().authenticated()
                 );
 
