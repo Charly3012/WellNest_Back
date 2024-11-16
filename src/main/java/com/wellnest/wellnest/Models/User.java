@@ -1,6 +1,5 @@
 package com.wellnest.wellnest.Models;
 
-import com.wellnest.wellnest.Models.DTOs.DTOCreateUser;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
@@ -11,10 +10,15 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
-@Table(name = "users")
-@Entity(name = "user")
-@Getter
-@Setter
+@Table(
+        name = "users",
+        uniqueConstraints = {
+                @UniqueConstraint(columnNames = {"email"}),
+                @UniqueConstraint(columnNames = {"nickname"})
+        }
+)@Entity(name = "user")
+@Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = "idUser")
@@ -23,44 +27,42 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public long idUser;
     public String name;
+    @Column(unique = true)
     public String nickname;
+    @Column(unique = true)
     public String email;
     public String password;
     public Date bornDate;
+    @Enumerated(EnumType.STRING)
+    public UserRole role;
 
 
-
-    public User(DTOCreateUser dtoCreateUser) {
-        this.name = dtoCreateUser.name();
-        this.nickname = dtoCreateUser.nickname();
-        this.email = dtoCreateUser.email();
-        this.password = dtoCreateUser.password();
-        this.bornDate = dtoCreateUser.bornDate();
-    }
+    //JTW methods
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority("ROLE_USER"));
+        return List.of(new SimpleGrantedAuthority(role.name()));
     }
-    @Override
-    public String getPassword() {
-        return password;
-    }
+
     @Override
     public String getUsername() {
         return email;
     }
+
     @Override
     public boolean isAccountNonExpired() {
         return true;
     }
+
     @Override
     public boolean isAccountNonLocked() {
         return true;
     }
+
     @Override
     public boolean isCredentialsNonExpired() {
         return true;
     }
+
     @Override
     public boolean isEnabled() {
         return true;
