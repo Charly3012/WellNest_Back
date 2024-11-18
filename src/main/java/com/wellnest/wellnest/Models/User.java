@@ -16,7 +16,8 @@ import java.util.List;
                 @UniqueConstraint(columnNames = {"email"}),
                 @UniqueConstraint(columnNames = {"nickname"})
         }
-)@Entity(name = "user")
+)
+@Entity(name = "user")
 @Data
 @Builder
 @NoArgsConstructor
