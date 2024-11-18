@@ -21,7 +21,7 @@ public class JwtService {
     private static final String SECRET = System.getenv("SECRET_KEY");
 
 
-    public String getToken(UserDetails user)
+    public String getToken(UserDetails user)    
     {
 
         return getToken(new HashMap<>(), user);
