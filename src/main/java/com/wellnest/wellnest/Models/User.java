@@ -26,15 +26,20 @@ import java.util.List;
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "idUser")
     public long idUser;
+    @Column(name = "name")
     public String name;
-    @Column(unique = true)
+    @Column(unique = true, name = "nickname")
     public String nickname;
-    @Column(unique = true)
+    @Column(unique = true, name = "email")
     public String email;
+    @Column(name = "password")
     public String password;
+    @Column(name = "bornDate")
     public Date bornDate;
     @Enumerated(EnumType.STRING)
+    @Column(name = "userRole")
     public UserRole role;
 
 

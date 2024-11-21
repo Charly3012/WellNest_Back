@@ -7,6 +7,7 @@ create table users
     email    varchar(50)  not null unique,
     password varchar(300) not null,
     bornDate date,
+    userRole varchar(50),
 
     primary key (idUser)
 

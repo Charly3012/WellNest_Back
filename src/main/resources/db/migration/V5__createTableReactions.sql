@@ -1,4 +1,4 @@
-CREATE TABLE Reactions (
+CREATE TABLE reactions (
    idReaction INT AUTO_INCREMENT,
    idPost  BIGINT NOT NULL,
    idUser  BIGINT NOT NULL,
