@@ -18,11 +18,15 @@ public class Note
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "idNote")
     public Long idNote;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "idUser", nullable = false)
     private User user;
+    @Column(name = "date")
     public Date date;
+    @Column(name = "content")
     public String content;
+    @Column(name = "state")
     public String state;
 }

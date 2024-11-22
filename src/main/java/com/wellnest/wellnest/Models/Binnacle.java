@@ -18,11 +18,14 @@ import java.util.Date;
 public class Binnacle {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "idBinnacle")
     public long idBinnacle;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "idUser", nullable = false)
     public User user;
+    @Column(name = "date")
     public Date date;
+    @Column(name = "content")
     public String content;
 
 }
