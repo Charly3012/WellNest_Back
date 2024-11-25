@@ -23,9 +23,7 @@ public class JwtService {
 
     public String getToken(UserDetails user)
     {
-
         return getToken(new HashMap<>(), user);
-
     }
 
     public String getToken(Map<String, Object> extraClaims, UserDetails user){
@@ -60,17 +58,7 @@ public class JwtService {
     public boolean isTokenValid(String token, UserDetails userDetails)
     {
         final String email = getEmailFromToken(token);
-        return (Objects.equals(email, userDetails.getUsername()) && !isTokenExpired(token));
-    }
-
-    private Date getExpirationDateFromToken(String token)
-    {
-        return getClaimFromToken(token, Claims::getExpiration);
-    }
-
-    private boolean isTokenExpired(String token)
-    {
-        return getExpirationDateFromToken(token).before(new Date());
+        return (email.equals(userDetails.getUsername()) && !isTokenExpired(token));
     }
 
     private Claims getAllClaims(String token)
@@ -83,9 +71,21 @@ public class JwtService {
                 .getBody();
     }
 
+    //Obtain particular claim
     public <T> T getClaimFromToken(String token, Function<Claims, T> claimsResolver)
     {
         final Claims claims = getAllClaims(token);
         return claimsResolver.apply(claims);
     }
+
+    private Date getExpirationDateFromToken(String token)
+    {
+        return getClaimFromToken(token, Claims::getExpiration);
+    }
+
+    private boolean isTokenExpired(String token)
+    {
+        return getExpirationDateFromToken(token).before(new Date());
+    }
+
 }

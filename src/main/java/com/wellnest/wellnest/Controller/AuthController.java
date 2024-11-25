@@ -19,11 +19,8 @@ public class AuthController {
 
     @Autowired
     private AuthenticationManager authenticationManager;
-
     @Autowired
     private AuthService authService;
-
-
 
     @PostMapping(value = "login")
     public ResponseEntity<AuthReponse> login(@RequestBody LoginRequest loginRequest)
@@ -32,11 +29,9 @@ public class AuthController {
         return ResponseEntity.ok(authService.login(loginRequest));
     }
 
-
     @PostMapping(value = "register")
     public ResponseEntity<AuthReponse> register(@RequestBody RegisterRequest registerRequest)
     {
-
         return ResponseEntity.ok(authService.register(registerRequest));
     }
 

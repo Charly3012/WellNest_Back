@@ -44,8 +44,6 @@ public class AuthService{
 
     public AuthReponse register(RegisterRequest request)
     {
-
-
         User user = User.builder()
                 .name(request.getName())
                 .nickname(request.getNickname())

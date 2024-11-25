@@ -24,13 +24,12 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     @Autowired
     private JwtService jwtService;
-
     @Autowired
     private UserDetailsService userDetailsService;
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
+            throws ServletException, IOException {
 
         final String token = getTokenFromRequest(request);
         final String email;
@@ -42,16 +41,15 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         }
         email = jwtService.getEmailFromToken(token);
 
-        if (email == null && SecurityContextHolder.getContext().getAuthentication() == null)
+        if (email != null && SecurityContextHolder.getContext().getAuthentication() == null)
         {
             UserDetails userDetails = userDetailsService.loadUserByUsername(email);
 
             if(jwtService.isTokenValid(token, userDetails))
             {
-                UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
-
+                UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken
+                        (userDetails, null, userDetails.getAuthorities());
                 authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-
                 SecurityContextHolder.getContext().setAuthentication(authToken);
             }
         }
@@ -66,6 +64,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
         if (StringUtils.hasText(authHeader) && authHeader.startsWith("Bearer "))
         {
+            //The substring "7" is for "Baerer"
             return authHeader.substring(7);
         }else{
             return null;
