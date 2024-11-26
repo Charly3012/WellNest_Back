@@ -1,5 +1,6 @@
 package com.wellnest.wellnest.Models;
 
+import com.wellnest.wellnest.Models.Request.Note.InsertNoteRequest;
 import jakarta.persistence.*;
 import jdk.jfr.Relational;
 import lombok.AllArgsConstructor;
@@ -28,5 +29,10 @@ public class Note
     @Column(name = "content")
     public String content;
     @Column(name = "state")
-    public String state;
+    public boolean state;
+
+    public Note(InsertNoteRequest request){
+        this.content = request.content();
+        this.state = request.state();
+    }
 }
