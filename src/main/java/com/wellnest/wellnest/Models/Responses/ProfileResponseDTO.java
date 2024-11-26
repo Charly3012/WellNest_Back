@@ -1,4 +1,4 @@
-package com.wellnest.wellnest.Models.DTOs.Users;
+package com.wellnest.wellnest.Models.Responses;
 
 import com.wellnest.wellnest.Models.User;
 
