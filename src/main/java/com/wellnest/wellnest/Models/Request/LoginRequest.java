@@ -13,9 +13,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class LoginRequest {
-    @NotBlank(message = "El correo no puede estar vació")
-    @Pattern(regexp = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$")
+    @NotBlank(message = "Password must not be empty")
+    @Pattern(regexp = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$", message = "The format is not correct, must be like 'example@domain.com'")
     String email;
-    @NotBlank(message = "La contraseña no debe estar vacía ")
+    @NotBlank(message = "Password must not be empty")
     String password;
 }

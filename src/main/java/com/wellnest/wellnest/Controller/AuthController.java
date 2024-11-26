@@ -30,7 +30,7 @@ public class AuthController {
     }
 
     @PostMapping(value = "register")
-    public ResponseEntity<AuthReponse> register(@RequestBody RegisterRequest registerRequest)
+    public ResponseEntity<AuthReponse> register(@RequestBody @Valid RegisterRequest registerRequest)
     {
         return ResponseEntity.ok(authService.register(registerRequest));
     }
