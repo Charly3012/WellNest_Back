@@ -21,8 +21,7 @@ public class UserService {
     }
 
     public User getUserFromToken(String token){
-        String jwt = token.replace("Bearer ", "");
-        var id = jwtService.getUserId(jwt);
+        var id = jwtService.getUserIdFromToken(token);
 
         return userRepository.findById(id)
                 .orElseThrow(() -> new ExpressionException("Usuario no encontrado con id: " + id));
