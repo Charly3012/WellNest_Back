@@ -12,6 +12,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 public class RegisterRequest {
+
     public String name;
     public String nickname;
     public String email;
