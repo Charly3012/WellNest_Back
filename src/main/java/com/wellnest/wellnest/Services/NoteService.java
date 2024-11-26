@@ -8,6 +8,8 @@ import com.wellnest.wellnest.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
+
 @Service
 public class NoteService {
     @Autowired
@@ -19,12 +21,13 @@ public class NoteService {
 
     public Long insertNote(String token, InsertNoteRequest request)
     {
-        Long userId = jwtService.getUserId(token);
+        Long userId = jwtService.getUserIdFromToken(token);
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new IllegalArgumentException("User not found with id: " + userId));
 
         Note note = new Note(request);
         note.setUser(user);
+        note.setDate(new Date());
         Note savedNote = noteRepository.save(note);
         return savedNote.getIdNote();
     }
