@@ -83,6 +83,12 @@ public class JwtService {
         return getClaimFromToken(token, Claims::getExpiration);
     }
 
+    public long getUserId(String token)
+    {
+        long id = Long.parseLong(getClaimFromToken(token, Claims::getId));
+        return id;
+    }
+
     private boolean isTokenExpired(String token)
     {
         return getExpirationDateFromToken(token).before(new Date());
