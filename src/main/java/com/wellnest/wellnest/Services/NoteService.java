@@ -2,13 +2,22 @@ package com.wellnest.wellnest.Services;
 
 import com.wellnest.wellnest.Models.Note;
 import com.wellnest.wellnest.Models.Request.Note.InsertNoteRequest;
+import com.wellnest.wellnest.Models.Responses.Note.NoteResponse;
 import com.wellnest.wellnest.Models.User;
 import com.wellnest.wellnest.Repository.NoteRepository;
 import com.wellnest.wellnest.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.PageRequest;
+
+
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class NoteService {
@@ -30,5 +39,16 @@ public class NoteService {
         note.setDate(new Date());
         Note savedNote = noteRepository.save(note);
         return savedNote.getIdNote();
+    }
+
+    public List<NoteResponse> getUserNotes(String token) {
+        Long userId = jwtService.getUserIdFromToken(token);
+        User user = userRepository.getReferenceById(userId);
+        var notesPage = noteRepository.findAllByUser(user);
+
+        return notesPage.stream()
+                .map(NoteResponse::new)
+                .collect(Collectors.toList());
+
     }
 }
