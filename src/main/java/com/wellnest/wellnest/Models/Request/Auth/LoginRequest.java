@@ -1,4 +1,4 @@
-package com.wellnest.wellnest.Models.Request;
+package com.wellnest.wellnest.Models.Request.Auth;
 
 
 import jakarta.validation.constraints.NotBlank;

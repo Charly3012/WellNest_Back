@@ -1,7 +1,7 @@
 package com.wellnest.wellnest.Services;
 
-import com.wellnest.wellnest.Models.Request.LoginRequest;
-import com.wellnest.wellnest.Models.Request.RegisterRequest;
+import com.wellnest.wellnest.Models.Request.Auth.LoginRequest;
+import com.wellnest.wellnest.Models.Request.Auth.RegisterRequest;
 import com.wellnest.wellnest.Models.Responses.AuthReponse;
 import com.wellnest.wellnest.Models.User;
 import com.wellnest.wellnest.Models.UserRole;
@@ -11,8 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 

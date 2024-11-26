@@ -84,8 +84,9 @@ public class JwtService {
     }
 
     // Metodo para obtener el ID del claim "id"
-    public Long getUserId(String token) {
-        Claims claims = getAllClaims(token);
+    public Long getUserIdFromToken(String token) {
+        String jwtToken = token.replace("Bearer ", "");
+        Claims claims = getAllClaims(jwtToken);
 
         Object idObject = claims.get("id");
         if (idObject == null) {

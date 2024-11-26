@@ -3,7 +3,7 @@ CREATE TABLE notes (
     idUser BIGINT NOT NULL,
     date DATETIME DEFAULT CURRENT_TIMESTAMP,
     content TEXT,
-    state VARCHAR(255),
+    state BOOLEAN,
     PRIMARY KEY (idNote),
     CONSTRAINT FK_user FOREIGN KEY (idUser)
         REFERENCES users(idUser)

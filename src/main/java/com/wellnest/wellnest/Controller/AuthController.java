@@ -1,11 +1,10 @@
 package com.wellnest.wellnest.Controller;
 
-import com.wellnest.wellnest.Models.Request.LoginRequest;
-import com.wellnest.wellnest.Models.Request.RegisterRequest;
+import com.wellnest.wellnest.Models.Request.Auth.LoginRequest;
+import com.wellnest.wellnest.Models.Request.Auth.RegisterRequest;
 import com.wellnest.wellnest.Models.Responses.AuthReponse;
 import com.wellnest.wellnest.Services.AuthService;
 import jakarta.validation.Valid;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
