@@ -1,6 +1,6 @@
 package com.wellnest.wellnest.Controller;
 
-import com.wellnest.wellnest.Models.DTOs.Users.ProfileResponseDTO;
+import com.wellnest.wellnest.Models.Responses.ProfileResponseDTO;
 import com.wellnest.wellnest.Models.User;
 import com.wellnest.wellnest.Repository.UserRepository;
 import com.wellnest.wellnest.Services.JwtService;
