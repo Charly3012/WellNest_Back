@@ -83,10 +83,20 @@ public class JwtService {
         return getClaimFromToken(token, Claims::getExpiration);
     }
 
-    public long getUserId(String token)
-    {
-        long id = Long.parseLong(getClaimFromToken(token, Claims::getId));
-        return id;
+    // Metodo para obtener el ID del claim "id"
+    public Long getUserId(String token) {
+        Claims claims = getAllClaims(token);
+
+        Object idObject = claims.get("id");
+        if (idObject == null) {
+            throw new IllegalArgumentException("El token no contiene un ID válido");
+        }
+
+        try {
+            return Long.parseLong(idObject.toString());
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("El ID en el token no es un número válido");
+        }
     }
 
     private boolean isTokenExpired(String token)
