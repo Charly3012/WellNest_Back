@@ -3,14 +3,13 @@ package com.wellnest.wellnest.Models;
 import com.wellnest.wellnest.Models.Request.Note.InsertNoteRequest;
 import jakarta.persistence.*;
 import jdk.jfr.Relational;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.Date;
 @Data
 @Builder
+@Setter
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "notes")
@@ -20,16 +19,16 @@ public class Note
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idNote")
-    public Long idNote;
+    private Long idNote;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "idUser", nullable = false)
     private User user;
     @Column(name = "date")
-    public Date date;
+    private Date date;
     @Column(name = "content")
-    public String content;
+    private String content;
     @Column(name = "state")
-    public boolean state;
+    private boolean state;
 
     public Note(InsertNoteRequest request){
         this.content = request.content();
