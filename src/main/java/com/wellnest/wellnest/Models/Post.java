@@ -1,16 +1,17 @@
 package com.wellnest.wellnest.Models;
 
+import com.wellnest.wellnest.Models.Request.Post.InsertPostRequest;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.Date;
 
 @Builder
+@Setter
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name = "post")
+@Entity(name = "posts")
 public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,4 +29,15 @@ public class Post {
     @Column(name = "mood")
     public String mood;
 
+
+
+    public Post(InsertPostRequest insertRequest){
+        this.postContent = insertRequest.postContent();
+        this.mood = insertRequest.mood();
+        this.conter = 0;
+        this.postDate = new Date();
+    }
+
+
 }
+
