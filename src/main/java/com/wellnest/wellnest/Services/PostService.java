@@ -12,9 +12,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 @Service
 public class PostService {
     @Autowired
@@ -25,7 +22,7 @@ public class PostService {
     PostRepository postRepository;
 
 
-    private Post findNoteAndCheckOwnership(String token, Long noteId){
+    private Post findPostAndCheckOwnership(String token, Long noteId){
         Long userId = jwtService.getUserIdFromToken(token);
         User user = userRepository.findById(userId)
                 .orElseThrow(()->new IllegalArgumentException("User Not Found"));
@@ -62,12 +59,12 @@ public class PostService {
     }
 
     public void deletePost(String token, Long postId){
-        Post post = findNoteAndCheckOwnership(token,postId);
+        Post post = findPostAndCheckOwnership(token,postId);
         postRepository.delete(post);
     }
 
     public PostResponse modifyPost(String token, Long postId, ModifyPostRequest postRequest){
-        Post post = findNoteAndCheckOwnership(token, postId);
+        Post post = findPostAndCheckOwnership(token, postId);
         post.setPostContent(postRequest.postContent());
         return new PostResponse(post);
     }

@@ -35,18 +35,14 @@ public class PostController {
     @PostMapping("InsertPost")
     public ResponseEntity<Void> insertPost(@RequestBody @Valid InsertPostRequest request,
                                        @RequestHeader("Authorization") String token, UriComponentsBuilder uriComponentsBuilder){
-       try {
-           Long idPost = postService.insertPost(token, request);
-           URI location = uriComponentsBuilder.path("/api/v1/post/{id}").buildAndExpand(idPost).toUri();
-           return  ResponseEntity.created(location).build();
-       }catch (Exception e){
-           return ResponseEntity.notFound().build();
-       }
-
+       Long idPost = postService.insertPost(token, request);
+       URI location = uriComponentsBuilder.path("/api/v1/post/{id}").buildAndExpand(idPost).toUri();
+       return  ResponseEntity.created(location).build();
     }
 
     @GetMapping("GetUserPost")
-    public Page<PostResponse> GetUserPost(@RequestHeader("Authorization") String token, @PageableDefault(size = 20) Pageable pageable){
+    public Page<PostResponse> GetUserPost(@RequestHeader("Authorization") String token,
+                                          @PageableDefault(size = 20) Pageable pageable){
        return postService.getUserPost(token, pageable);
     }
 
@@ -55,14 +51,16 @@ public class PostController {
         return postService.getAllPost(pageable);
     }
     @DeleteMapping("{postId}")
-    public ResponseEntity<Void> DeletePost(@RequestHeader("Authorization") String token,@PathVariable Long postId){
+    public ResponseEntity<Void> DeletePost(@RequestHeader("Authorization") String token,
+                                           @PathVariable Long postId){
         postService.deletePost(token,postId);
         return ResponseEntity.noContent().build();
     }
 
     @PutMapping("{postId}")
     @Transactional
-    public ResponseEntity<PostResponse> DeletePost(@RequestHeader("Authorization") String token, @PathVariable Long postId, @RequestBody ModifyPostRequest postRequest){
+    public ResponseEntity<PostResponse> DeletePost(@RequestHeader("Authorization") String token,
+                                                   @PathVariable Long postId, @RequestBody ModifyPostRequest postRequest){
         PostResponse postResponse = postService.modifyPost(token,postId,postRequest);
         return ResponseEntity.ok(postResponse);
     }
