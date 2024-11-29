@@ -30,7 +30,7 @@ public class UserService {
         if (!(user.getIdUser() == iduser || user.getRole().toString().equals("ADMIN"))) {
             throw new SecurityException("You are not authorized to modify this note");
         }
-        return user;
+        return userRepository.getReferenceById(iduser);
     }
 
     public User getUserFromToken(String token){
