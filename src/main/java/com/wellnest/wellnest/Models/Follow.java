@@ -29,14 +29,10 @@ public class Follow {
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateStartFollow;
 
-
-    @Override
-    public String toString() {
-        return "Follow{" +
-                "idRelation=" + idRelation +
-                ", user=" + user.getName() +
-                ", follower=" + follower.getName() +
-                ", dateStartFollow=" + dateStartFollow +
-                '}';
+    public Follow(User user, User follower) {
+        this.user = user;
+        this.follower = follower;
+        this.dateStartFollow = new Date();
     }
+
 }

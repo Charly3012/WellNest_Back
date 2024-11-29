@@ -61,6 +61,8 @@ public class ErrorHandler {
                     error = "There is already a user with the same nickname";
                 } else if (sqlException.getMessage().contains("Duplicate entry") && sqlException.getMessage().contains("users.email")) {
                     error = "There is already a user with the same email address";
+                } else if (sqlException.getMessage().contains("Duplicate entry") && sqlException.getMessage().contains("followers.idUser")) {
+                    error = "This user is already followed";
                 }
                 errorType = "UNIQUE CONSTRAINT VIOLATION";
             } else if (codigoError == 1452) { // MySQL foreign key violation error code
