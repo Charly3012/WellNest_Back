@@ -7,13 +7,15 @@ import java.util.Date;
 public record PostResponse(
         Long id,
         Date date,
+        String name,
+        String nickname,
         String postContent,
         String mood
 
 ) {
 
     public PostResponse(Post post){
-        this(post.getIdPost(), post.getPostDate(), post.getPostContent(),post.getMood());
+        this(post.getIdPost(), post.getPostDate(), post.getUser().getName(), post.getUser().nickname, post.getPostContent(),post.getMood());
     }
 
 

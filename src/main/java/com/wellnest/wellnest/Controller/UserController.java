@@ -1,13 +1,12 @@
 package com.wellnest.wellnest.Controller;
 
-import com.wellnest.wellnest.Models.Responses.ProfileResponseDTO;
+import com.wellnest.wellnest.Models.Responses.User.ProfileResponseDTO;
 import com.wellnest.wellnest.Models.User;
 import com.wellnest.wellnest.Repository.UserRepository;
 import com.wellnest.wellnest.Services.JwtService;
 import com.wellnest.wellnest.Services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,6 +22,7 @@ public class UserController {
 
     @Autowired
     private final UserService userService;
+
     @Autowired
     private JwtService jwtService;
 
@@ -37,12 +37,11 @@ public class UserController {
 
     @GetMapping("getProfile")
     public ResponseEntity<ProfileResponseDTO> getCurrentUser(@RequestHeader("Authorization") String token){
-        try{
-            var user = userService.getUserFromToken(token);
-            return ResponseEntity.ok(new ProfileResponseDTO(user));
-        }catch (Exception e){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        var user = userService.getUserFromToken(token);
+        for(var userFoll : user.getFollowers()){
+            System.out.println(userFoll);
         }
+        return ResponseEntity.ok(new ProfileResponseDTO(user));
     }
 
 

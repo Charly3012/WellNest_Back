@@ -15,6 +15,7 @@ public class UserService {
     @Autowired
     private JwtService jwtService;
 
+
     public User getUser(long id){
         return userRepository.findById(id)
                 .orElseThrow(() -> new ExpressionException("Usuario no encontrado con id: " + id));

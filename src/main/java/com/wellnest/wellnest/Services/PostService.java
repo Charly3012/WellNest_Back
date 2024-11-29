@@ -66,6 +66,7 @@ public class PostService {
     public PostResponse modifyPost(String token, Long postId, ModifyPostRequest postRequest){
         Post post = findPostAndCheckOwnership(token, postId);
         post.setPostContent(postRequest.postContent());
+        post.setMood(postRequest.mood());
         return new PostResponse(post);
     }
 
