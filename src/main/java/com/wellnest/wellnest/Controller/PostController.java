@@ -59,7 +59,7 @@ public class PostController {
 
     @PutMapping("{postId}")
     @Transactional
-    public ResponseEntity<PostResponse> DeletePost(@RequestHeader("Authorization") String token,
+    public ResponseEntity<PostResponse> ModifyPost(@RequestHeader("Authorization") String token,
                                                    @PathVariable Long postId, @RequestBody ModifyPostRequest postRequest){
         PostResponse postResponse = postService.modifyPost(token,postId,postRequest);
         return ResponseEntity.ok(postResponse);
