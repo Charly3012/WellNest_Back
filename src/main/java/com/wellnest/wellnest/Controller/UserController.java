@@ -65,5 +65,18 @@ public class UserController {
         return ResponseEntity.ok(profileResponse);
     }
 
+    @DeleteMapping("{userId}")
+    public ResponseEntity<ProfileResponseDTO> deletUser(@RequestHeader("Authorization") String token, @PathVariable Long userId){
+        userService.deletUser(token,userId);
+        return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping("{userId}")
+    @Transactional
+    public  ResponseEntity<ProfileResponseDTO> modifyUserProfile(@RequestHeader("Authorization") String token, @RequestBody ModifyUserProfile modifyRequest){
+        ProfileResponseDTO profileResponse = userService.modifyUser(token, modifyRequest);
+        return ResponseEntity.ok(profileResponse);
+    }
+
 
 }

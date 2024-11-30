@@ -1,10 +1,11 @@
 package com.wellnest.wellnest.Services;
 
+import com.wellnest.wellnest.Models.Post;
+import com.wellnest.wellnest.Models.Request.User.ModifyUserProfile;
+import com.wellnest.wellnest.Models.Responses.User.ProfileResponseDTO;
 import com.wellnest.wellnest.Models.Follow;
 import com.wellnest.wellnest.Models.Note;
 import com.wellnest.wellnest.Models.Post;
-import com.wellnest.wellnest.Models.Request.User.ModifyUserProfile;
-import com.wellnest.wellnest.Models.Responses.ProfileResponseDTO;
 import com.wellnest.wellnest.Models.User;
 import com.wellnest.wellnest.Repository.FollowRepository;
 import com.wellnest.wellnest.Repository.UserRepository;
@@ -24,8 +25,7 @@ public class UserService {
     @Autowired
     private JwtService jwtService;
 
-
-    private User getUser(long id){
+    public User getUser(long id){
         return userRepository.findById(id)
                 .orElseThrow(() -> new ExpressionException("Usuario no encontrado con id: " + id));
     }
