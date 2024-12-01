@@ -71,8 +71,8 @@ public class UserService {
         followRepository.save(follow);
     }
 
-    public List<User> searchUsers(String query) {
-        return userRepository.findByNameContainingOrNicknameContaining(query, query);
+    public List<String> searchUserNicknames(String query) {
+        return userRepository.findNicknamesByQuery(query);
     }
 
 
