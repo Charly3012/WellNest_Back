@@ -12,6 +12,7 @@ import com.wellnest.wellnest.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.expression.ExpressionException;
 import org.springframework.stereotype.Service;
+import java.util.List;
 
 @Service
 public class UserService {
@@ -69,4 +70,10 @@ public class UserService {
         Follow follow = new Follow(getUser(currenUserId), getUser(idUser));
         followRepository.save(follow);
     }
+
+    public List<User> searchUsers(String query) {
+        return userRepository.findByNameContainingOrNicknameContaining(query, query);
+    }
+
+
 }

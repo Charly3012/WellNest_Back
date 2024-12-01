@@ -65,5 +65,11 @@ public class UserController {
         return ResponseEntity.ok(profileResponse);
     }
 
+    @GetMapping("/search")
+    public ResponseEntity<List<User>> searchUsers(@RequestParam String query) {
+        List<User> users = userService.searchUsers(query);
+        return ResponseEntity.ok(users);
+    }
+
 
 }
