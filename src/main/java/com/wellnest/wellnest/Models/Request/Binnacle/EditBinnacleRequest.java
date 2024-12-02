@@ -1,6 +1,6 @@
 package com.wellnest.wellnest.Models.Request.Binnacle;
 
-public record InsertBinnacleRequest(
+public record EditBinnacleRequest(
         String content
 ) {
 }
