@@ -25,7 +25,7 @@ public class Post {
     @Column(name = "postContent")
     public String postContent;
     @Column(name = "conter")
-    public int conter;
+    public Integer conter;
     @Column(name = "mood")
     public String mood;
 
