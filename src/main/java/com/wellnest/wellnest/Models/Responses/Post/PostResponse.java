@@ -15,7 +15,7 @@ public record PostResponse(
 ) {
 
     public PostResponse(Post post){
-        this(post.getIdPost(), post.getPostDate(), post.getUser().getName(), post.getUser().nickname, post.getPostContent(),post.getMood());
+        this(post.getIdPost(), post.getPostDate(), post.getUser().getName(), post.getUser().getNickname(), post.getPostContent(),post.getMood());
     }
 
 
