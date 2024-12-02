@@ -6,12 +6,17 @@ import com.wellnest.wellnest.Models.Responses.User.ProfileResponseDTO;
 import com.wellnest.wellnest.Models.Follow;
 import com.wellnest.wellnest.Models.Note;
 import com.wellnest.wellnest.Models.Post;
+import com.wellnest.wellnest.Models.Responses.User.SearchByNicknameResponse;
 import com.wellnest.wellnest.Models.User;
 import com.wellnest.wellnest.Repository.FollowRepository;
 import com.wellnest.wellnest.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.expression.ExpressionException;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class UserService {
@@ -68,5 +73,12 @@ public class UserService {
         Long currenUserId = jwtService.getUserIdFromToken(token);
         Follow follow = new Follow(getUser(currenUserId), getUser(idUser));
         followRepository.save(follow);
+    }
+
+    public List<SearchByNicknameResponse> searchUsers(String query) {
+        //Search in database and cast List<User> to List<SearchByNicknameResponse>
+        return userRepository.findByNicknameContains(query).stream()
+                .map(user -> new SearchByNicknameResponse(user))
+                .collect(Collectors.toList());
     }
 }
