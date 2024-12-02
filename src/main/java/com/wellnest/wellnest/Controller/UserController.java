@@ -3,6 +3,7 @@ package com.wellnest.wellnest.Controller;
 import com.wellnest.wellnest.Models.Request.User.ModifyUserProfile;
 import com.wellnest.wellnest.Models.Responses.User.ProfileResponseDTO;
 import com.wellnest.wellnest.Models.Responses.User.ProfileResponseDTO;
+import com.wellnest.wellnest.Models.Responses.User.SearchByNicknameResponse;
 import com.wellnest.wellnest.Models.User;
 import com.wellnest.wellnest.Repository.UserRepository;
 import com.wellnest.wellnest.Services.JwtService;
@@ -65,10 +66,10 @@ public class UserController {
         return ResponseEntity.ok(profileResponse);
     }
 
-    @GetMapping("/search")
-    public ResponseEntity<List<String>> searchUserNicknames(@RequestParam String query) {
-        List<String> nicknames = userService.searchUserNicknames(query);
-        return ResponseEntity.ok(nicknames);
+    @GetMapping("searchUsersByNickname")
+    public ResponseEntity<List<SearchByNicknameResponse>> searchUsers(@RequestParam String query) {
+        List<SearchByNicknameResponse> usersSearched = userService.searchUsers(query);
+        return ResponseEntity.ok(usersSearched);
     }
 
 

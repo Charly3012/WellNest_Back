@@ -12,7 +12,11 @@ import java.util.Optional;
 public interface UserRepository extends JpaRepository<User, Long> {
 
     Optional<User> findByEmail(String email);
-    @Query("SELECT u.nickname FROM user u WHERE u.name LIKE %:query% OR u.nickname LIKE %:query%")
+
+    @Query("SELECT u FROM user u WHERE u.name LIKE %:query% OR u.nickname LIKE %:query%")
     List<String> findNicknamesByQuery(@Param("query") String query);
+
+    @Query("select u from user u where u.nickname like concat('%', :nickname, '%')")
+    List<User> findByNicknameContains(@Param("nickname") String nickname);
 
 }
