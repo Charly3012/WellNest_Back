@@ -28,4 +28,5 @@ public class Binnacle {
     @Column(name = "content")
     public String content;
 
+
 }
