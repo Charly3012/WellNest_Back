@@ -59,7 +59,7 @@ public class UserController {
         return ResponseEntity.noContent().build();
     }
 
-    @PutMapping("{userId}")
+    @PutMapping("modifyProfile")
     @Transactional
     public  ResponseEntity<ProfileResponseDTO> modifyUserProfile(@RequestHeader("Authorization") String token, @RequestBody ModifyUserProfile modifyRequest){
         ProfileResponseDTO profileResponse = userService.modifyUser(token, modifyRequest);

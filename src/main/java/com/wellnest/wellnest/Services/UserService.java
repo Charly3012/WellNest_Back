@@ -64,7 +64,6 @@ public class UserService {
         User user = getUser(userId);
 
             user.setName(modifyRequest.name());
-            user.setEmail(modifyRequest.email());
             user.setNickname(modifyRequest.nickname());
         return new ProfileResponseDTO(user);
     }
