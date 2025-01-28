@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestControllerAdvice
@@ -59,12 +61,14 @@ public class ErrorHandler {
                 error = "Datos duplicados";
                 if (sqlException.getMessage().contains("Duplicate entry") && sqlException.getMessage().contains("users.nickname")) {
                     error = "There is already a user with the same nickname";
+                    errorType = "Nickname";
                 } else if (sqlException.getMessage().contains("Duplicate entry") && sqlException.getMessage().contains("users.email")) {
                     error = "There is already a user with the same email address";
+                    errorType = "Email";
                 } else if (sqlException.getMessage().contains("Duplicate entry") && sqlException.getMessage().contains("followers.idUser")) {
                     error = "This user is already followed";
+                    errorType = "Id user followed";
                 }
-                errorType = "UNIQUE CONSTRAINT VIOLATION";
             } else if (codigoError == 1452) { // MySQL foreign key violation error code
                 error = "Dato no encontrado";
                 errorType = "FOREIGN KEY VIOLATION";
@@ -74,10 +78,12 @@ public class ErrorHandler {
 
         Map<String, String> errorResponseDetail = new HashMap<>();
         errorResponseDetail.put("Error", error);
-        errorResponseDetail.put("Error type", errorType);
+        errorResponseDetail.put("Field", errorType);
 
+        List<Map<String, String>> errorList= new ArrayList<>();
+        errorList.add(errorResponseDetail);
         Map<String, Object> errorResponse = new HashMap<>();
-        errorResponse.put("Errors", errorResponseDetail);
+        errorResponse.put("Errors", errorList);
         return ResponseEntity.badRequest().body(errorResponse);
     }
 

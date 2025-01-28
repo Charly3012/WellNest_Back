@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.wellnest</groupId>
 	<artifactId>wellnest</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<name>wellnest</name>
 	<description>A social network focus at mental healt</description>
 	<url/>
